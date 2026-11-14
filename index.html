@@ -9,15 +9,14 @@
 <meta property="og:description" content="Ofertas de boosters, boxes e acessórios de TCG direto no seu WhatsApp. Entre no grupo, é grátis.">
 <meta property="og:image" content="logo-time-cupom.jpg">
 <meta name="theme-color" content="#0a0809">
-<link rel="icon" href="logo-time-cupom.jpg">
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#0a0809;
-  --bg-2:#150c0d;
   --surface:#1a1314;
   --surface-2:#241a1b;
   --line:rgba(232,190,92,.2);
@@ -25,19 +24,18 @@
   --gold-2:#f7dc8c;
   --gold-3:#b5852b;
   --red:#c4161c;
-  --red-hot:#ff2a33;
   --red-2:#8e0f13;
   --red-3:#4a0709;
   --navy:#13306b;
   --text:#f6efe2;
   --muted:#c9b9a3;
-  --wpp:#25d366;
-  --wpp-2:#1da851;
+  --green:#16c94f;
+  --green-2:#0a8a35;
   --cut:clamp(40px,7vw,120px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-snap-type:y proximity}
-body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;-webkit-text-size-adjust:100%}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .display{font-family:'Lilita One',sans-serif;font-weight:400;line-height:.95;letter-spacing:.5px}
@@ -51,23 +49,13 @@ a{color:inherit;text-decoration:none}
   transition:background .3s,height .3s;
 }
 .topbar.scrolled{background:rgba(10,8,9,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);height:80px;border-bottom:1px solid var(--line)}
-.logo-badge{
-  width:86px;height:86px;padding:6px;flex:none;
-  background:linear-gradient(145deg,var(--gold-2),var(--gold-3));
-  clip-path:polygon(14% 0,100% 0,100% 86%,86% 100%,0 100%,0 14%);
-  transition:width .3s,height .3s;
-}
 .topbar-spacer{width:52px;flex:none}
-.topbar.scrolled .logo-badge{width:62px;height:62px;padding:4px}
-.logo-badge img{width:100%;height:100%;object-fit:cover;clip-path:inherit;background:#000}
 .menu{display:flex;gap:clamp(24px,4vw,64px)}
 .menu a{font-weight:800;font-size:.9rem;letter-spacing:1.2px;text-transform:uppercase;position:relative;padding:6px 0}
 .menu a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .25s}
 .menu a:hover::after,.menu a.active::after{transform:scaleX(1)}
 .menu a.active{color:var(--gold-2)}
-.burger{
-  width:52px;height:52px;display:grid;place-items:center;background:none;border:0;cursor:pointer;color:var(--gold);
-}
+.burger{width:52px;height:52px;display:grid;place-items:center;background:none;border:0;cursor:pointer;color:var(--gold)}
 .burger span,.burger span::before,.burger span::after{display:block;width:32px;height:4px;border-radius:2px;background:currentColor;position:relative;transition:.3s}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0}
 .burger span::before{top:-10px}
@@ -80,37 +68,36 @@ body.menu-open .burger span::after{top:0;transform:rotate(-45deg)}
 .overlay{
   position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
   background:radial-gradient(800px 500px at 50% 40%,rgba(196,22,28,.45),transparent 70%),rgba(10,8,9,.96);
-  opacity:0;pointer-events:none;transition:opacity .3s;
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
 }
-body.menu-open .overlay{opacity:1;pointer-events:auto}
+body.menu-open{overflow:hidden}
+body.menu-open .overlay{opacity:1;visibility:visible}
 .overlay a.lk{font-family:'Lilita One',sans-serif;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:1px}
 .overlay a.lk:hover{color:var(--gold-2)}
 
-/* redes sociais (esquerda) */
-.socials{position:fixed;left:clamp(16px,2.4vw,36px);bottom:40px;z-index:60;display:flex;flex-direction:column;gap:14px}
+/* WhatsApp fixo (esquerda, desktop) */
+.socials{position:fixed;left:clamp(16px,2.4vw,36px);bottom:40px;z-index:60}
 .socials a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--gold);color:var(--gold-2);background:rgba(10,8,9,.6);transition:.2s}
 .socials a:hover{background:var(--gold);color:var(--bg);transform:scale(1.08)}
 .socials svg{width:18px;height:18px}
 
-/* bolinhas de navegação (direita) */
+/* bolinhas de navegação (direita, desktop) */
 .dots{
   position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;
   padding:30px 22px 30px 26px;display:flex;flex-direction:column;gap:18px;
   background:linear-gradient(180deg,var(--red),var(--red-2));
   clip-path:polygon(30% 0,100% 0,100% 100%,30% 100%,0 85%,0 15%);
 }
-.dots a{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.85);transition:.25s;position:relative}
+.dots a{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.85);transition:.25s}
 .dots a.active{background:var(--gold-2);box-shadow:0 0 0 4px rgba(247,220,140,.25),0 0 12px var(--gold-2)}
-.dots a span{position:absolute;right:30px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:.8rem;font-weight:700;background:var(--bg);border:1px solid var(--line);padding:3px 10px;border-radius:6px;opacity:0;pointer-events:none;transition:.2s}
 
-/* ================= SEÇÕES (estrutura do modelo) ================= */
+/* ================= SEÇÕES ================= */
 .screen{
   position:relative;min-height:100vh;scroll-snap-align:start;
   padding:130px clamp(70px,7vw,120px) 70px;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,60px);align-items:center;
   overflow:hidden;isolation:isolate;
 }
-/* fundo com corte diagonal */
 .screen::before{
   content:"";position:absolute;inset:0;z-index:-2;
   background:
@@ -163,22 +150,20 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 
 /* botão chanfrado */
 .cta{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:20px 38px;font-weight:800;font-size:1.05rem;letter-spacing:1.2px;text-transform:uppercase;
-  color:#04220f;background:linear-gradient(180deg,#3ef08a,var(--wpp-2));
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  padding:20px 38px;font-weight:800;font-size:1.05rem;letter-spacing:1.2px;text-transform:uppercase;text-align:center;
+  color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);background:linear-gradient(180deg,var(--green),var(--green-2));
   clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
-  filter:drop-shadow(0 10px 22px rgba(37,211,102,.55));
+  filter:drop-shadow(0 10px 22px rgba(22,201,79,.5));
   transition:transform .2s,filter .2s;
 }
-.cta:hover{transform:translateY(-3px);filter:drop-shadow(0 16px 30px rgba(37,211,102,.75))}
+.cta:hover{transform:translateY(-3px);filter:drop-shadow(0 16px 30px rgba(22,201,79,.7))}
 .cta svg{width:24px;height:24px;flex:none}
-.cta.gold{color:var(--red-3);background:linear-gradient(180deg,var(--gold-2),var(--gold-3));filter:drop-shadow(0 10px 22px rgba(232,190,92,.45))}
-.mini-trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:.92rem;color:#f6dcd2}
-.mini-trust span::before{content:"✓ ";color:var(--gold-2);font-weight:800}
+.cta.gold{color:var(--red-3);text-shadow:none;background:linear-gradient(180deg,var(--gold-2),var(--gold-3));filter:drop-shadow(0 10px 22px rgba(232,190,92,.45))}
+.panel .cta{min-width:min(100%,420px);padding-top:26px;padding-bottom:26px}
 
 /* ================= VISUAL DO HERO ================= */
 .visual{position:relative;height:min(78vh,640px)}
-/* "aparelho" do modelo -> booster gigante inclinado */
 .booster{
   position:absolute;right:-14%;top:-4%;width:min(46%,320px);aspect-ratio:9/15;
   transform:rotate(32deg);z-index:1;
@@ -186,7 +171,6 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 }
 .booster-body{
   position:absolute;inset:0;
-  --zz:radial-gradient(circle at 50% 0,transparent 5px,#000 5.5px);
   background:
     linear-gradient(115deg,transparent 25%,rgba(255,255,255,.35) 40%,transparent 55%),
     radial-gradient(circle at 50% 46%,rgba(232,190,92,.4),transparent 45%),
@@ -199,7 +183,7 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
   background:repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,transparent 2px 7px),linear-gradient(180deg,var(--gold-2),var(--gold-3))}
 .booster-body::before{top:0}
 .booster-body::after{bottom:0}
-.booster-body img{width:62%;border-radius:50%;box-shadow:0 0 30px rgba(232,190,92,.6)}
+.booster-body img{width:62%;height:auto;border-radius:50%;box-shadow:0 0 30px rgba(232,190,92,.6)}
 .booster-body b{font-family:'Lilita One',sans-serif;font-weight:400;font-size:clamp(1.1rem,2vw,1.6rem);color:var(--gold-2);letter-spacing:2px;text-align:center;line-height:1}
 .booster-body small{font-weight:800;font-size:.7rem;letter-spacing:3px;color:#fff;opacity:.8}
 
@@ -211,30 +195,24 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
   animation:bob 7s ease-in-out infinite;
 }
 .polaroid .pic{
-  aspect-ratio:1;overflow:hidden;position:relative;
-  background:
-    radial-gradient(circle at 50% 50%,rgba(232,190,92,.4),transparent 60%),
-    linear-gradient(160deg,var(--red),var(--red-3));
+  aspect-ratio:1;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%,rgba(232,190,92,.4),transparent 60%),linear-gradient(160deg,var(--red),var(--red-3));
   display:grid;place-items:center;
 }
-.polaroid .pic img{width:78%;border-radius:50%;box-shadow:0 0 40px rgba(232,190,92,.6)}
+.polaroid .pic img{width:78%;height:auto;border-radius:50%;box-shadow:0 0 40px rgba(232,190,92,.6)}
+.polaroid .pic.photo img{width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--red-2)}
 @keyframes bob{50%{transform:rotate(-6deg) translateY(-10px)}}
 
-/* "dados" do modelo -> mini cartas flutuando */
+/* mini cartas flutuando */
 .mini{
-  position:absolute;width:clamp(42px,5vw,70px);aspect-ratio:63/88;border-radius:7px;z-index:2;
-  border:3px solid var(--gold);
-  background:
-    radial-gradient(circle at 50% 50%,var(--gold-2) 0 16%,transparent 17%),
-    radial-gradient(circle at 50% 50%,transparent 0 24%,rgba(232,190,92,.6) 25% 28%,transparent 29%),
-    linear-gradient(160deg,var(--red),var(--red-2));
+  position:absolute;width:clamp(60px,7.5vw,105px);height:auto;aspect-ratio:63/88;object-fit:cover;
+  border-radius:7px;border:3px solid var(--gold);background:var(--red-2);z-index:2;
   box-shadow:0 14px 26px -6px rgba(0,0,0,.8),0 0 22px rgba(255,42,51,.5);
   animation:drift 6s ease-in-out infinite;
 }
 .mini.m1{left:12%;top:8%;transform:rotate(-18deg)}
-.mini.m2{left:56%;top:-2%;--r:22deg;transform:rotate(22deg);animation-delay:1.2s;
-  background:radial-gradient(circle at 50% 50%,var(--gold-2) 0 16%,transparent 17%),linear-gradient(160deg,var(--navy),#0a1a3d)}
+.mini.m2{left:56%;top:-2%;transform:rotate(22deg);animation-delay:1.2s}
 .mini.m3{right:4%;top:44%;transform:rotate(-12deg);animation-delay:2.4s;z-index:4}
 @keyframes drift{50%{translate:0 -14px}}
 
@@ -249,7 +227,7 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
   box-shadow:0 18px 40px -16px rgba(0,0,0,.9);
 }
 .holo:hover{box-shadow:0 30px 60px -18px rgba(0,0,0,.9),0 0 40px -6px rgba(232,190,92,.5)}
-.holo-inner{position:relative;height:100%;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:10px}
+.holo-inner{position:relative;height:100%;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;padding:10px}
 .holo-inner::before{
   content:"";position:absolute;inset:0;
   background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.18),transparent 45%),repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 9px),linear-gradient(170deg,var(--c1),var(--c2));
@@ -261,8 +239,8 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 }
 .holo:hover .holo-inner::after{opacity:1}
 .holo-art,.holo-bottom{position:relative;z-index:1}
-.holo-art{flex:1;margin-bottom:8px;border-radius:6px;border:2px solid rgba(232,190,92,.6);background:rgba(0,0,0,.25);display:grid;place-items:center}
-.holo-art svg{width:46%;height:auto;color:var(--gold-2);filter:drop-shadow(0 4px 12px rgba(0,0,0,.6))}
+.holo-art{flex:1;margin-bottom:8px;border-radius:6px;border:2px solid rgba(232,190,92,.6);background:rgba(0,0,0,.25);overflow:hidden}
+.holo-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .holo-bottom h3{font-family:'Lilita One',sans-serif;font-weight:400;font-size:clamp(.85rem,1.15vw,1.08rem);line-height:1.1;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
 .t-poke{--c1:#d42a2a;--c2:#5c0b0d}.t-op{--c1:#1d4fa8;--c2:#0b1b3f}.t-mtg{--c1:#5a3d2a;--c2:#1c120c}.t-ygo{--c1:#6b3fa0;--c2:#231039}
 .t-dbs{--c1:#e5781f;--c2:#6b2a05}.t-digi{--c1:#1792b8;--c2:#06303f}.t-lor{--c1:#3a3f9e;--c2:#100f33}.t-more{--c1:#2b2b2b;--c2:#0d0d0d}
@@ -292,6 +270,9 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 .step h3{font-size:1.12rem;line-height:1.3}
 .step p{color:#f6dcd2;font-size:.97rem}
 
+.visual.how{display:flex;align-items:center}
+.visual.how .polaroid{left:0;bottom:6%;width:min(40%,240px);transform:rotate(-10deg);padding-bottom:44px}
+.visual.how .polaroid .cap{font-size:1.2rem}
 .phone{
   position:relative;z-index:2;margin-left:auto;margin-right:8%;width:100%;max-width:320px;border-radius:38px;padding:11px;
   background:linear-gradient(160deg,#2b2b2b,#0b0b0b);transform:rotate(6deg);
@@ -306,14 +287,12 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 .bubble{align-self:flex-start;max-width:94%;background:#202c33;border-radius:0 12px 12px 12px;padding:9px 11px 5px;font-size:.84rem;line-height:1.45;color:#e9edef}
 .bubble .who{color:var(--gold);font-weight:700;font-size:.76rem;margin-bottom:4px}
 .bubble .tag{display:inline-block;background:var(--red);color:#fff;font-weight:700;font-size:.68rem;padding:2px 7px;border-radius:5px;margin-bottom:6px}
+.bubble .tag.navy{background:var(--navy)}
+.bubble .price{color:#4ade80}
 .bubble .link{color:#53bdeb}
 .bubble .time{display:block;text-align:right;font-size:.66rem;color:#8696a0;margin-top:3px}
-.bubble .prod-img{height:96px;border-radius:8px;margin-bottom:8px;display:grid;place-items:end start;padding:8px;font-family:'Lilita One',sans-serif;font-size:.88rem;color:var(--gold-2);
-  background:radial-gradient(circle at 50% 50%,rgba(232,190,92,.9) 0 10%,transparent 11%),repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 6px,transparent 6px 12px),linear-gradient(135deg,var(--navy),var(--red))}
+.bubble .prod-img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px;background:#1f2c34}
 .note{position:absolute;right:8%;bottom:-34px;font-size:.78rem;color:var(--muted)}
-.visual.how .polaroid{left:0;bottom:6%;width:min(40%,240px);transform:rotate(-10deg);padding-bottom:44px}
-.visual.how .polaroid .cap{font-size:1.2rem}
-.visual.how{display:flex;align-items:center}
 
 /* ================= FAQ ================= */
 .faq{display:flex;flex-direction:column;gap:10px}
@@ -329,15 +308,12 @@ body.menu-open .overlay{opacity:1;pointer-events:auto}
 .final-card .polaroid{position:relative;left:auto;bottom:auto;width:min(70%,300px);margin-bottom:46px}
 .final-card h2{font-size:clamp(2.4rem,4.6vw,4rem);margin-bottom:12px}
 .final-card p{color:var(--muted);font-size:1.1rem;max-width:420px;margin-bottom:28px}
+.final-card .cta{min-width:min(100%,480px);padding:28px 40px;font-size:1.15rem}
 
 footer{padding:34px 20px 40px;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);background:#070506}
 footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
 
-/* botão flutuante (mobile) */
-.float-wpp{position:fixed;right:18px;bottom:18px;z-index:65;width:60px;height:60px;border-radius:50%;display:none;place-items:center;background:var(--wpp);color:#fff;box-shadow:0 10px 30px -6px rgba(37,211,102,.7)}
-.float-wpp svg{width:32px;height:32px}
-
-/* reveal */
+/* animação de entrada */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 .holo.reveal.in{transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease,box-shadow .25s ease,opacity .7s ease}
@@ -351,11 +327,9 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
 @media (max-width:900px){
   html{scroll-snap-type:none}
   .topbar{height:80px}
-  .logo-badge{width:62px;height:62px;padding:4px}
   .screen{grid-template-columns:minmax(0,1fr);padding:110px 16px 70px;min-height:auto}
   .screen::after{width:70%;height:30%}
   .socials,.dots{display:none}
-  .float-wpp{display:grid}
   .visual{height:auto;min-height:420px}
   .hero .visual{order:-1;min-height:360px;max-width:460px;width:100%;margin:0 auto}
   .booster{right:0;top:0;width:40%}
@@ -364,16 +338,22 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
   .phone{margin:0 auto;transform:none}
   .visual.how .polaroid{display:none}
   .note{position:static;margin-top:12px;text-align:center}
-  .tcg-grid{grid-template-columns:repeat(4,1fr)}
 }
 @media (max-width:560px){
   .tcg-grid{grid-template-columns:repeat(3,1fr)}
   .holo-inner{padding:7px}
   .holo-bottom h3{font-size:.78rem}
   .prod-grid{grid-template-columns:1fr}
-  .cta{padding:18px 24px;font-size:.95rem}
+  .cta{padding:18px 22px;font-size:.95rem}
+  .final-card .cta{padding:24px 22px;font-size:1rem}
   .panel{--cut:34px}
-  .hero .visual{min-height:300px}
+  .hero .visual{min-height:340px}
+  .hero .polaroid{left:2%;bottom:2%;width:40%;padding:8px 8px 36px}
+  .hero .polaroid .cap{font-size:1.05rem;bottom:8px;letter-spacing:2px}
+  .hero .mini{z-index:4}
+  .hero .mini.m1{left:6%;top:2%}
+  .hero .mini.m2{left:50%;top:0}
+  .hero .mini.m3{right:4%;top:52%}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -385,11 +365,7 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="i-wpp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
-    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></g></symbol>
-    <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3c.4 2.2 1.8 3.7 4 4v3.1c-1.5 0-2.9-.4-4-1.2v6.6A5.5 5.5 0 1 1 11 10v3.2a2.4 2.4 0 1 0 2.4 2.4V3z"/></symbol>
-  </defs>
+  <symbol id="i-wpp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.870 9.870 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.860 9.860 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.030 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.050 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 0 0-3.480-8.413Z"/></symbol>
 </svg>
 
 <!-- ===== TOPO ===== -->
@@ -401,7 +377,7 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
     <a href="#como-funciona">Como funciona</a>
     <a href="#duvidas">Dúvidas</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+  <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="overlay"><span></span></button>
 </header>
 
 <div class="overlay" id="overlay">
@@ -413,10 +389,8 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
   <a class="cta js-grupo" href="#" target="_blank" rel="noopener" style="margin-top:14px"><svg><use href="#i-wpp"/></svg> Entrar no grupo</a>
 </div>
 
-<!-- redes (esquerda) -->
+<!-- WhatsApp fixo (esquerda) -->
 <div class="socials">
-  <a class="js-insta" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
-  <a class="js-tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg><use href="#i-tt"/></svg></a>
   <a class="js-grupo" href="#" target="_blank" rel="noopener" aria-label="Grupo do WhatsApp"><svg><use href="#i-wpp"/></svg></a>
 </div>
 
@@ -437,21 +411,23 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
     <i class="panel-border"></i>
     <span class="kicker">ENTRE NO TIME!</span>
     <h1 class="display title">TIME<br><span class="g">CUPOM</span></h1>
-    <p class="txt">O clube de ofertas de cartas colecionáveis. Todo dia a gente caça as melhores promoções de Pokémon, One Piece, Magic, Yu-Gi-Oh! e muito mais, e manda direto no seu WhatsApp.</p>
+    <p class="txt">As melhores ofertas de Pokémon, One Piece, Magic e muito mais, direto no seu WhatsApp!</p>
     <a class="cta js-grupo" href="#" target="_blank" rel="noopener"><svg><use href="#i-wpp"/></svg> Entrar no grupo</a>
   </div>
 
   <div class="visual" aria-hidden="true">
-    <i class="mini m1"></i><i class="mini m2"></i><i class="mini m3"></i>
+    <img class="mini m1" src="img/card-pokemon.webp" width="186" height="260" alt="">
+    <img class="mini m2" src="img/card-one-piece.webp" width="186" height="260" alt="">
+    <img class="mini m3" src="img/card-dragon-ball.webp" width="260" height="260" alt="">
     <div class="booster">
       <div class="booster-body">
-        <img src="logo-time-cupom.jpg" alt="">
+        <img src="img/logo.webp" width="398" height="400" alt="">
         <b>OFERTAS<br>TCG</b>
         <small>CLUBE DE OFERTAS</small>
       </div>
     </div>
     <div class="polaroid">
-      <div class="pic"><img src="logo-time-cupom.jpg" alt=""></div>
+      <div class="pic photo"><img src="img/hero-animes.webp" width="660" height="660" alt="" fetchpriority="high"></div>
       <span class="cap">Clube de ofertas TCG</span>
     </div>
   </div>
@@ -463,34 +439,34 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
     <i class="panel-border"></i>
     <span class="kicker">NOSSO DECK</span>
     <h2 class="display title md">OS TCGs QUE<br><span class="g">A GENTE CAÇA</span></h2>
-    <p class="txt">Se é card game, a gente está de olho. Ofertas garimpadas nas maiores lojas do Brasil para todos os jogos que você coleciona ou joga.</p>
+    <p class="txt">Todos os card games, as melhores ofertas, direto para você!</p>
     <a class="cta gold js-grupo" href="#" target="_blank" rel="noopener"><svg><use href="#i-wpp"/></svg> Quero as ofertas</a>
   </div>
 
   <div class="tcg-grid">
     <article class="holo t-poke reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M4 24h14M30 24h14" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" stroke-width="3.5"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-pokemon.webp" width="466" height="520" alt="Pokémon TCG" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Pokémon TCG</h3></div></div></article>
     <article class="holo t-op reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M8 26c0-9 7-16 16-16s16 7 16 16"/><path d="M4 26h40"/><circle cx="18" cy="34" r="4"/><circle cx="30" cy="34" r="4"/><path d="M22 34h4"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-one-piece.webp" width="316" height="500" alt="One Piece Card Game" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>One Piece Card Game</h3></div></div></article>
     <article class="holo t-mtg reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="currentColor"><path d="M24 4c3 8 12 10 12 22a12 12 0 0 1-24 0c0-5 3-9 6-11 0 5 2 8 4 8-2-7 0-14 2-19z"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-magic.webp" width="520" height="520" alt="Magic: The Gathering" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Magic: The Gathering</h3></div></div></article>
     <article class="holo t-ygo reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 4 44 40H4z"/><circle cx="24" cy="28" r="5"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-yugioh.webp" width="520" height="520" alt="Yu-Gi-Oh!" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Yu-Gi-Oh!</h3></div></div></article>
     <article class="holo t-dbs reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="3.5"/><path fill="currentColor" d="m24 13 3.2 7.2 7.8.7-5.9 5.2 1.8 7.7L24 29.8l-6.9 4 1.8-7.7-5.9-5.2 7.8-.7z"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-dragon-ball.webp" width="403" height="520" alt="Dragon Ball Super" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Dragon Ball Super</h3></div></div></article>
     <article class="holo t-digi reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3"><rect x="10" y="6" width="28" height="36" rx="8"/><rect x="16" y="13" width="16" height="13" rx="2"/><circle cx="18" cy="34" r="2" fill="currentColor"/><circle cx="30" cy="34" r="2" fill="currentColor"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-digimon.webp" width="350" height="500" alt="Digimon" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Digimon</h3></div></div></article>
     <article class="holo t-lor reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 4 38 24 24 44 10 24z"/><path d="M24 14 31 24 24 34 17 24z" fill="currentColor"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-lorcana.webp" width="520" height="520" alt="Disney Lorcana" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>Disney Lorcana</h3></div></div></article>
     <article class="holo t-more reveal"><div class="holo-inner">
-      <div class="holo-art"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><path d="M24 12v24M12 24h24"/></svg></div>
+      <div class="holo-art"><img src="img/tcg-mais.webp" width="520" height="520" alt="E muito mais" loading="lazy" decoding="async"></div>
       <div class="holo-bottom"><h3>E muito mais</h3></div></div></article>
   </div>
 </section>
@@ -501,7 +477,7 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
     <i class="panel-border"></i>
     <span class="kicker">O QUE CAI NO GRUPO</span>
     <h2 class="display title md">DO BOOSTER<br><span class="g">AO PLAYMAT</span></h2>
-    <p class="txt">Tudo o que um colecionador ou jogador precisa, com preço de oferta de verdade e cupons que deixam tudo ainda mais barato.</p>
+    <p class="txt">Ofertas reais e cupons exclusivos para colecionadores e jogadores.</p>
     <a class="cta js-grupo" href="#" target="_blank" rel="noopener"><svg><use href="#i-wpp"/></svg> Entrar no grupo</a>
   </div>
 
@@ -541,26 +517,26 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
 
   <div class="visual how reveal">
     <div class="polaroid" aria-hidden="true">
-      <div class="pic"><img src="logo-time-cupom.jpg" alt=""></div>
+      <div class="pic photo"><img src="img/booster-pack.webp" width="373" height="500" alt="" loading="lazy" decoding="async"></div>
       <span class="cap">Entre no time!</span>
     </div>
-    <div class="phone" aria-label="Exemplo de mensagem no grupo">
+    <div class="phone" role="img" aria-label="Exemplo de mensagem de oferta no grupo">
       <div class="scr">
-        <div class="chat-head"><img src="logo-time-cupom.jpg" alt=""><div><b>Time Cupom | Ofertas TCG</b><small>grupo de ofertas</small></div></div>
+        <div class="chat-head"><img src="img/logo.webp" width="36" height="36" alt="" loading="lazy" decoding="async"><div><b>Time Cupom | Ofertas TCG</b><small>grupo de ofertas</small></div></div>
         <div class="chat-body">
           <div class="bubble">
             <div class="who">Time Cupom</div>
             <span class="tag">🔥 OFERTA RELÂMPAGO</span>
-            <div class="prod-img">BOOSTER BOX</div>
+            <img class="prod-img" src="img/booster-box.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
             <b>Booster Box da nova coleção</b><br>
-            De <s>R$ 999,90</s> por <b style="color:#4ade80">R$ 749,90</b><br>
+            De <s>R$ 999,90</s> por <b class="price">R$ 749,90</b><br>
             🎟️ Cupom: <b>TIMECUPOM</b><br>
             👉 <span class="link">link da loja</span>
             <span class="time">09:41</span>
           </div>
           <div class="bubble">
             <div class="who">Time Cupom</div>
-            <span class="tag" style="background:var(--navy)">⏰ PRÉ-VENDA ABERTA</span><br>
+            <span class="tag navy">⏰ PRÉ-VENDA ABERTA</span><br>
             Nova expansão disponível pra reserva. Garanta a sua!
             <span class="time">10:15</span>
           </div>
@@ -588,7 +564,7 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
 
   <div class="final-card reveal">
     <div class="polaroid">
-      <div class="pic"><img src="logo-time-cupom.jpg" alt="Logo Time Cupom"></div>
+      <div class="pic"><img src="img/logo.webp" width="398" height="400" alt="Logo Time Cupom" loading="lazy" decoding="async"></div>
       <span class="cap">Bora pro time?</span>
     </div>
     <h2 class="display gold-text">NUNCA MAIS PAGUE CARO EM CARTA</h2>
@@ -604,22 +580,13 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
   <small>Pokémon, One Piece Card Game, Magic: The Gathering, Yu-Gi-Oh!, Dragon Ball Super, Digimon, Disney Lorcana e demais nomes citados são marcas de seus respectivos proprietários. O Time Cupom não possui vínculo com esses detentores. Preços e disponibilidade podem mudar a qualquer momento nas lojas. Alguns links podem ser de afiliados.</small>
 </footer>
 
-<a class="float-wpp js-grupo" href="#" target="_blank" rel="noopener" aria-label="Entrar no grupo do WhatsApp"><svg><use href="#i-wpp"/></svg></a>
-
 <script>
   /* ===========================================================
-     LINKS DO CLIENTE — troque aqui
+     LINK DO GRUPO — troque aqui se mudar
      =========================================================== */
-  const LINK_GRUPO  = "https://chat.whatsapp.com/COLE-O-LINK-AQUI";
-  const LINK_INSTA  = "https://instagram.com/";   // perfil do Instagram (deixe "" para esconder)
-  const LINK_TIKTOK = "https://tiktok.com/";      // perfil do TikTok (deixe "" para esconder)
+  const LINK_GRUPO = "https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA?s=cl&p=a&iam=2";
 
-  const setLinks = (sel, url) => document.querySelectorAll(sel).forEach(a => {
-    if (url) a.href = url; else a.remove();
-  });
-  setLinks(".js-grupo", LINK_GRUPO);
-  setLinks(".js-insta", LINK_INSTA);
-  setLinks(".js-tiktok", LINK_TIKTOK);
+  document.querySelectorAll(".js-grupo").forEach(a => a.href = LINK_GRUPO);
   document.getElementById("ano").textContent = new Date().getFullYear();
 
   // menu hambúrguer
@@ -638,7 +605,6 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   // seção ativa (bolinhas + menu)
-  const sections = [...document.querySelectorAll("main .screen")];
   const navLinks = [...document.querySelectorAll(".dots a, .menu a")];
   const so = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -646,7 +612,7 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
       navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
     });
   }, { rootMargin: "-45% 0px -45% 0px" });
-  sections.forEach(s => so.observe(s));
+  document.querySelectorAll("main .screen").forEach(s => so.observe(s));
 
   // animação de entrada
   const io = new IntersectionObserver(entries => {
@@ -654,18 +620,24 @@ footer small{display:block;max-width:760px;margin:10px auto 0;opacity:.75}
   }, { threshold: .12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // efeito holográfico
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // efeito holográfico: só em telas com mouse, 1 atualização por quadro
+  if (matchMedia("(hover:hover) and (pointer:fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.querySelectorAll(".holo").forEach(card => {
+      let frame = 0;
       card.addEventListener("pointermove", e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        card.style.setProperty("--mx", x * 100 + "%");
-        card.style.setProperty("--my", y * 100 + "%");
-        card.style.setProperty("--ry", (x - .5) * 18 + "deg");
-        card.style.setProperty("--rx", (.5 - y) * 18 + "deg");
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+          card.style.setProperty("--mx", x * 100 + "%");
+          card.style.setProperty("--my", y * 100 + "%");
+          card.style.setProperty("--ry", (x - .5) * 18 + "deg");
+          card.style.setProperty("--rx", (.5 - y) * 18 + "deg");
+        });
       });
       card.addEventListener("pointerleave", () => {
+        cancelAnimationFrame(frame); frame = 0;
         card.style.setProperty("--rx", "0deg");
         card.style.setProperty("--ry", "0deg");
       });
