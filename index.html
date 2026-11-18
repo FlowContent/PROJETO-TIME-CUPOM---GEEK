@@ -77,20 +77,20 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 }
 /* a imagem encolhe conforme a altura da tela, pro botão aparecer sem rolar */
 .ring{
-  position:relative;aspect-ratio:1/1.02;margin:0 auto;min-width:180px;
-  width:min(500px,100%,calc(100vh - 414px));
-  width:min(500px,100%,calc(100svh - 414px));
+  position:relative;aspect-ratio:1.19/1;margin:0 auto;min-width:200px;
+  width:min(600px,100%,calc((100vh - 414px)*1.19));
+  width:min(600px,100%,calc((100svh - 414px)*1.19));
 }
-.ring img{position:absolute;width:23%;filter:drop-shadow(0 12px 18px rgba(0,0,0,.45))}
-.ring .logo{left:50%;top:50%;width:46%;translate:-50% -50%;border-radius:50%;filter:none;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.ring .tile{background:#fff;padding:6px;border-radius:8px}
-.ring .i1{left:20%;top:4%;rotate:-9deg}
-.ring .i2{left:52%;top:0;rotate:5deg;width:25%}
-.ring .i3{right:2%;top:24%;rotate:12deg}
-.ring .i4{right:1%;bottom:16%;rotate:-6deg;width:25%}
-.ring .i5{left:42%;bottom:0;rotate:3deg;width:20%;border-radius:8px}
-.ring .i6{left:2%;bottom:18%;rotate:-14deg}
-.ring .i7{left:0;top:26%;rotate:7deg;width:20%}
+.ring img{position:absolute;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5))}
+/* logo grande no centro, por cima dos produtos */
+.ring .logo{left:50%;top:49%;width:56%;translate:-50% -50%;border-radius:50%;z-index:2;filter:drop-shadow(0 0 28px rgba(240,196,92,.35)) drop-shadow(0 20px 40px rgba(0,0,0,.5))}
+.ring .i1{left:15%;top:2%;width:21%;rotate:-4deg}   /* funko */
+.ring .i2{left:41%;top:0;width:25%}                  /* yu-gi-oh */
+.ring .i3{right:0;top:9%;width:30%;rotate:8deg}     /* magic */
+.ring .i4{left:66%;top:44%;width:34%;rotate:16deg}   /* charizard */
+.ring .i5{left:37%;bottom:0;width:28%}               /* lorcana */
+.ring .i6{left:0;top:52%;width:32%;rotate:-6deg}     /* combo pokémon */
+.ring .i7{left:0;top:30%;width:27%;rotate:-4deg}     /* etb */
 .hero h1{font-size:clamp(2rem,min(6vw,7vh),4rem);margin:14px 0 12px}
 .hero p{max-width:560px;margin:0 auto 22px;color:var(--muted);font-size:1.08rem}
 .hero p b{color:var(--text)}
@@ -185,7 +185,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
   /* topo ocupa a tela toda: imagem no espaço livre, botão rente embaixo */
   .hero{padding:28px 0 32px;min-height:calc(100vh - 34px);min-height:calc(100svh - 34px);display:flex;flex-direction:column}
   .hero .wrap{flex:1;display:flex;flex-direction:column;align-items:center}
-  .ring{margin:auto;width:min(100%,calc(100vh - 440px));width:min(100%,calc(100svh - 440px))}
+  .ring{margin:auto;flex:none;width:min(100vw - 8px,calc((100vh - 440px)*1.19));width:min(100vw - 8px,calc((100svh - 440px)*1.19))}
   .hero h1{font-size:min(1.85rem,7.5vw);margin:22px 0 14px}
   .hero p{font-size:1rem;margin-bottom:26px}
   .prod-grid{grid-template-columns:1fr}
@@ -221,7 +221,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
     <div class="ring" aria-hidden="true">
       <img class="i1" src="img/hero-1.png" width="374" height="500" alt="">
       <img class="i2" src="img/hero-2.png" width="532" height="469" alt="">
-      <img class="i3" src="img/hero-3.png" width="532" height="469" alt="">
+      <img class="i3" src="img/hero-3.png" width="520" height="520" alt="">
       <img class="i4" src="img/hero-4.png" width="427" height="584" alt="">
       <img class="i5" src="img/hero-5.png" width="539" height="463" alt="">
       <img class="i6" src="img/hero-6.png" width="431" height="579" alt="">
@@ -230,7 +230,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
     </div>
 
     <h1>Seu próximo booster<br><span class="hl">pelo menor preço.</span></h1>
-    <p>Entre no <b>Time Cupom</b> e receba ofertas e cupons de <b>Pokémon, Magic, Yu-Gi-Oh!, One Piece, Lorcana</b> e muito mais no WhatsApp!</p>
+    <p>Entre no <b>Time Cupom</b> e receba ofertas e cupons de <b>Pokémon, One Piece, Magic</b> e muito mais no WhatsApp!</p>
     <a class="btn" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wpp"/></svg> Entrar no clube grátis</a>
   </div>
 </section>
