@@ -11,9 +11,9 @@
 <meta name="theme-color" content="#560509">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preload" as="image" href="img/logo.webp" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap"></noscript>
 
 <!-- Meta Pixel Code -->
 <script>
@@ -33,16 +33,13 @@ src="https://www.facebook.com/tr?id=1001768835700035&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-
 <style>
 :root{
   --red-1:#a3151b;
   --red-3:#560509;
   --red-4:#3d0306;
-  --card:#6e0b10;
   --line:rgba(240,196,92,.22);
   --gold:#f0c45c;
-  --cream:#fbf6ec;
   --text:#fff8ee;
   --muted:#e6c9bf;
 }
@@ -61,7 +58,6 @@ img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:1.05;letter-spacing:-.01em}
 .hl{color:var(--gold)}
-.center{text-align:center}
 .wrap{width:min(1040px,100% - 32px);margin-inline:auto}
 section{padding:88px 0}
 /* seções abaixo da dobra só são desenhadas quando chegam perto da tela */
@@ -114,27 +110,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .hero p{max-width:560px;margin:0 auto 22px;color:var(--muted);font-size:1.08rem}
 .hero p b{color:var(--text)}
 
-/* ================= JOGOS ================= */
-.games{border-top:1px solid var(--line)}
-.game-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.game{border-radius:14px;overflow:hidden;background:var(--cream);aspect-ratio:4/5;display:flex;flex-direction:column}
-.game img{flex:1;min-height:0;width:100%;object-fit:contain;padding:14px;transition:transform .3s}
-.game.full img{object-fit:cover;padding:0}
-.game span{background:var(--card);padding:12px 14px;font-weight:700;font-size:.98rem}
-.game:hover img{transform:scale(1.04)}
-
-/* ================= PRODUTOS ================= */
-.products{background:linear-gradient(180deg,transparent,rgba(0,0,0,.18))}
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.prod{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
-.prod .pic{background:var(--cream);aspect-ratio:1;padding:22px}
-.prod .pic img{width:100%;height:100%;object-fit:contain}
-.prod .info{padding:16px 18px 20px}
-.prod h3{font-size:1.2rem;margin-bottom:4px}
-.prod p{color:var(--muted);font-size:.95rem}
-.also{margin:34px auto 38px;max-width:760px;text-align:center;color:var(--muted);font-size:1.02rem}
-.also b{color:var(--text)}
-
 /* ================= ALERTA ================= */
 .alert{border-block:1px solid var(--line);background:rgba(0,0,0,.14)}
 .alert .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:center}
@@ -157,6 +132,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 .points li b{color:var(--text)}
 
 /* ================= COMO FUNCIONA ================= */
+.steps-title{margin-bottom:40px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
 .step{padding:30px 28px 10px 0}
 .step + .step{padding-left:28px;border-left:1px solid var(--line)}
@@ -166,6 +142,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offs
 
 /* ================= DÚVIDAS ================= */
 .faq{padding-top:20px}
+.faq-title{margin-bottom:36px}
 .faq-list{max-width:700px;margin:0 auto}
 .faq-list details{border-bottom:1px solid var(--line)}
 .faq-list details:first-child{border-top:1px solid var(--line)}
@@ -191,8 +168,6 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
 /* ================= RESPONSIVO ================= */
 @media (max-width:860px){
   section{padding:68px 0}
-  .game-grid{grid-template-columns:repeat(2,1fr)}
-  .prod-grid{grid-template-columns:1fr 1fr}
   .alert .wrap{grid-template-columns:1fr;gap:44px}
   .alert .text{order:-1}
   .steps{grid-template-columns:1fr}
@@ -207,13 +182,10 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
   .ring{margin:auto;flex:none;width:min(100vw - 8px,calc((100vh - 440px)*1.19));width:min(100vw - 8px,calc((100svh - 440px)*1.19))}
   .hero h1{font-size:min(1.85rem,7.5vw);margin:22px 0 14px}
   .hero p{font-size:1rem;margin-bottom:26px}
-  .prod-grid{grid-template-columns:1fr}
   .btn{padding:0 22px;font-size:15px;letter-spacing:1px}
-  .game span{font-size:.9rem;padding:10px 12px}
 }
 @media (hover:none){
   .btn:hover{transform:none;filter:none}
-  .game:hover img{transform:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important}
@@ -238,61 +210,19 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
 <section class="hero">
   <div class="wrap">
     <div class="ring" aria-hidden="true">
-      <img class="i1" src="img/hero-1.png" width="374" height="500" alt="">
-      <img class="i2" src="img/hero-2.png" width="532" height="469" alt="">
-      <img class="i3" src="img/hero-3.png" width="520" height="520" alt="">
-      <img class="i4" src="img/hero-4.png" width="427" height="584" alt="">
-      <img class="i5" src="img/hero-5.png" width="539" height="463" alt="">
-      <img class="i6" src="img/hero-6.png" width="431" height="579" alt="">
-      <img class="i7" src="img/hero-7.png" width="500" height="500" alt="">
+      <img class="i1" src="img/hero-1.webp" width="374" height="500" alt="" decoding="async">
+      <img class="i2" src="img/hero-2.webp" width="420" height="370" alt="" decoding="async">
+      <img class="i3" src="img/hero-3.webp" width="420" height="420" alt="" decoding="async">
+      <img class="i4" src="img/hero-4.webp" width="420" height="574" alt="" decoding="async">
+      <img class="i5" src="img/hero-5.webp" width="420" height="361" alt="" decoding="async">
+      <img class="i6" src="img/hero-6.webp" width="420" height="564" alt="" decoding="async">
+      <img class="i7" src="img/hero-7.webp" width="420" height="420" alt="" decoding="async">
       <img class="logo" src="img/logo.webp" width="398" height="400" alt="" fetchpriority="high">
     </div>
 
     <h1>Seu próximo booster<br><span class="hl">pelo menor preço.</span></h1>
     <p>Entre no <b>Time Cupom</b> e receba ofertas e cupons de <b>Pokémon, One Piece, Magic</b> e muito mais no WhatsApp!</p>
     <a class="btn" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wpp"/></svg> Entrar no clube grátis</a>
-  </div>
-</section>
-
-<!-- JOGOS -->
-<section class="games">
-  <div class="wrap">
-    <h2 class="sec-title">Todos os jogos que você coleciona</h2>
-    <p class="sec-sub">Se tem carta, tem oferta. A gente acompanha os principais TCGs do mercado.</p>
-    <div class="game-grid">
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-pokemon.webp" width="466" height="520" alt="" loading="lazy" decoding="async"><span>Pokémon</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-one-piece.webp" width="316" height="500" alt="" loading="lazy" decoding="async"><span>One Piece</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-magic.webp" width="520" height="520" alt="" loading="lazy" decoding="async"><span>Magic</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-yugioh.webp" width="520" height="520" alt="" loading="lazy" decoding="async"><span>Yu-Gi-Oh!</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-dragon-ball.webp" width="403" height="520" alt="" loading="lazy" decoding="async"><span>Dragon Ball</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-digimon.webp" width="350" height="500" alt="" loading="lazy" decoding="async"><span>Digimon</span></a>
-      <a class="game reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-lorcana.webp" width="520" height="520" alt="" loading="lazy" decoding="async"><span>Lorcana</span></a>
-      <a class="game full reveal" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><img src="img/tcg-mais.webp" width="520" height="520" alt="" loading="lazy" decoding="async"><span>E muito mais</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUTOS -->
-<section class="products">
-  <div class="wrap">
-    <h2 class="sec-title">Tudo pro seu acervo <span class="hl">pelo menor preço</span></h2>
-    <p class="sec-sub">Do pacote avulso à caixa fechada, o que vale a pena chega no grupo.</p>
-    <div class="prod-grid">
-      <div class="prod reveal">
-        <div class="pic"><img src="img/booster-box.webp" width="640" height="640" alt="Booster box Pokémon Megaevolução" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Booster box</h3><p>Caixas fechadas com o menor preço por pacote.</p></div>
-      </div>
-      <div class="prod reveal">
-        <div class="pic"><img src="img/booster-pack.webp" width="373" height="500" alt="Combo de pacotes de booster Raio Preto" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Combos e boosters</h3><p>Pacotes avulsos e combos pra abrir sem pesar no bolso.</p></div>
-      </div>
-      <div class="prod reveal">
-        <div class="pic"><img src="img/tcg-magic.webp" width="520" height="520" alt="Starter kit de Magic" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Decks e starter kits</h3><p>Decks prontos pra começar a jogar ou presentear.</p></div>
-      </div>
-    </div>
-    <p class="also">Também aparecem <b>ETBs</b>, <b>sleeves</b>, <b>deck boxes</b>, <b>playmats</b>, <b>fichários</b> e <b>pré-vendas</b> de lançamentos.</p>
-    <div class="center"><a class="btn" href="https://chat.whatsapp.com/FATgyGn75kA5ypCOm2N9PA" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wpp"/></svg> Quero as ofertas</a></div>
   </div>
 </section>
 
@@ -304,7 +234,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
         <div class="chat-head"><img src="img/logo.webp" width="38" height="38" alt="" loading="lazy" decoding="async"><div><b>Time Cupom | Ofertas TCG</b><small>Só administradores enviam mensagens</small></div></div>
         <div class="chat-body">
           <div class="bubble">
-            <img src="img/booster-box.webp" width="640" height="640" alt="" loading="lazy" decoding="async">
+            <img src="img/booster-box.webp" width="480" height="480" alt="" loading="lazy" decoding="async">
             <b>Booster Box Pokémon Megaevolução</b><br>
             De <s>R$ 999,90</s> por <span class="price">R$ 749,90</span><br>
             Cupom: <b>TIMECUPOM</b><br>
@@ -331,7 +261,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
 <!-- COMO FUNCIONA -->
 <section>
   <div class="wrap">
-    <h2 class="sec-title" style="margin-bottom:40px">Como funciona</h2>
+    <h2 class="sec-title steps-title">Como funciona</h2>
     <div class="steps">
       <div class="step reveal"><span class="n">1</span><h3>Toque no botão verde</h3><p>O WhatsApp abre o convite do grupo. Não precisa de cadastro.</p></div>
       <div class="step reveal"><span class="n">2</span><h3>Receba os alertas</h3><p>Booster, ETB, display: a oferta chega assim que aparece.</p></div>
@@ -343,7 +273,7 @@ footer small{display:block;max-width:680px;margin:10px auto 0;opacity:.8}
 <!-- DÚVIDAS -->
 <section class="faq">
   <div class="wrap">
-    <h2 class="sec-title" style="margin-bottom:36px">Perguntas frequentes</h2>
+    <h2 class="sec-title faq-title">Perguntas frequentes</h2>
     <div class="faq-list">
       <details><summary>É de graça mesmo?</summary><p>Sim. O grupo é 100% gratuito. Você só paga pelo que decidir comprar, direto na loja.</p></details>
       <details><summary>Preciso fazer cadastro?</summary><p>Não. É só tocar no botão e entrar no grupo pelo WhatsApp.</p></details>
